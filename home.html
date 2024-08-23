@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <h4><span>T</span>o <span>D</span>o <span>L</span>ist</h4>
+        <ul>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+    
+    <div class="textbox">
+       <center> <input type="text" id="txt" placeholder="Enter a Task">
+        <button onclick="addTask()" id="onbut">Add</button></center>
+    </div>
+    <center><ul id="list"></ul></center>
+
+    <script>
+        function addTask() {
+            const task = document.getElementById("txt");
+            const value = task.value.trim();
+
+            if (value === '') {
+                alert('Please enter a task');
+                return;
+            }
+
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span>${value}</span>
+                <button class="complete">Complete</button>
+                <button class="delete">Delete</button>
+            `;
+
+            document.getElementById("list").appendChild(li);
+            task.value = ''; // Clear the input field after adding the task
+
+            // Mark task as completed
+            li.querySelector(".complete").addEventListener('click', function () {
+                li.classList.toggle("completed");
+            });
+
+            // Delete the task
+            li.querySelector(".delete").addEventListener('click', function () {
+                li.remove();
+            });
+        }
+    </script>
+</body>
+</html>
